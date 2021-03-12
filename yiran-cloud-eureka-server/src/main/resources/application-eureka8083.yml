@@ -1,0 +1,20 @@
+server:
+  port: 8083
+
+#eureka配置
+eureka:
+  instance:
+    hostname: eureka8083 #主机名/ip/域名 注意在集群模式应该给每个注册中心一个单独的名字
+  client:
+    #由于我们目前创建的应用是一个服务注册中心而不是普通的应用，默认情况下我们这个注册中心应用会自己注册自己
+    #所以设置为false代表禁止自己注册自己
+    register-with-eureka: false
+
+    #表示不去检索其他服务，因为服务注册中心本身的职责就是维护服务实例，它不需要去检索其它服务
+    fetch-registry: false
+
+    #指定服务注册中心位置 注意在集群模式下应手动指定名称与端口
+    service-url:
+      defaultZone: http://eureka8084:8084/eureka/
+  server:
+    enable-self-preservation: false #关闭自我保护机制

@@ -1,0 +1,15 @@
+#server:
+#  port: 9100
+#
+#spring:
+#  application:
+#    name: yiran-cloud-provider #应用名称
+#
+##eureka 配置
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://eureka8083:8083/eureka,http://eureka8084:8084/eureka #eureka服务注册中心地址
+#  instance:
+#    lease-renewal-interval-in-seconds: 2     #每间隔 2s 向服务端发送一次心跳，证明自己依然 "存活"
+#    lease-expiration-duration-in-seconds: 10 #告诉服务端，如果在 10s 之内没有发送心跳，就代表故障，可将其剔除

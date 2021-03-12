@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: yiran-cloud-consumer
+
+#eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka8083:8083/eureka,http://eureka8084:8084/eureka #eureka注册中心地址
