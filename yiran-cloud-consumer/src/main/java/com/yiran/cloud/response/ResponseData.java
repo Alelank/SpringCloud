@@ -8,16 +8,13 @@ import java.io.Serializable;
 public class ResponseData<T> implements Serializable {
     private int code = 200;
     private boolean success;
-    private String massage = "";
+    private String massage;
     private T data;
 
 
     public ResponseData(){ }
 
     public T getData(){
-        if(this.data == null){
-            return null;
-        }
         return this.data;
     }
 
@@ -41,14 +38,14 @@ public class ResponseData<T> implements Serializable {
         return success(code,success,"");
     }
 
-    public ResponseData<T> success(ResponseStatus code,boolean success,String message){
-        return success(code,success,message,null);
+    public ResponseData<T> success(ResponseStatus code,boolean success,String msg){
+        return success(code,success,msg,null);
     }
 
-    public ResponseData<T> success(ResponseStatus status,boolean success,String message,T data){
+    public ResponseData<T> success(ResponseStatus status,boolean success,String msg,T data){
         this.code = status.getCode();
         this.success = success;
-        this.massage = massage;
+        this.massage = msg;
         this.data = data;
         return this;
     }
@@ -58,14 +55,14 @@ public class ResponseData<T> implements Serializable {
         return error(ResponseStatus.Error,false,"请求失败");
     }
 
-    public ResponseData<T> error(ResponseStatus status,boolean success,String massage){
-        return error(status,success,massage,null);
+    public ResponseData<T> error(ResponseStatus status,boolean success,String msg){
+        return error(status,success,msg,null);
     }
 
-    public ResponseData<T> error(ResponseStatus status,boolean success,String massage,T data){
+    public ResponseData<T> error(ResponseStatus status,boolean success,String msg,T data){
         this.code = status.getCode();
         this.success = success;
-        this.massage = massage;
+        this.massage = msg;
         this.data = data;
         return this;
     }
