@@ -6,6 +6,7 @@ import com.yiran.cloud.response.ResponseStatus;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * 自定义的服务容错处理
  * Created by Ale on 2021/3/14
  */
 public class MyHystrixCommand extends HystrixCommand<ResponseData> {
