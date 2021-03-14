@@ -10,3 +10,14 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka8083:8083/eureka,http://eureka8084:8084/eureka #eureka注册中心地址
+
+
+# 表示用来暴露监控 exposure(端点) 的，
+# 由于 exposure 中会包含很多敏感信息，除了 health 和 info 两个支持直接访问外，
+# 其它默认不能访问，所以配置为 * 代表都能访问或者指定访问，指定访问如下配置
+# 指定访问配置 hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
