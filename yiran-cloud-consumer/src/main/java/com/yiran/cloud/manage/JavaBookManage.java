@@ -1,6 +1,9 @@
 package com.yiran.cloud.manage;
 
+import com.netflix.hystrix.HystrixCommand;
+import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.yiran.cloud.entity.JavaBook;
+import com.yiran.cloud.hystrix.MyHystrixCommand;
 import com.yiran.cloud.response.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * RestTemplate 操作案例
@@ -104,5 +109,29 @@ public class JavaBookManage {
         String[] params = {"1001", "《Java从入门到入土》", "Ale0"};
         restTemplate.delete("http://YIRAN-CLOUD-PROVIDER/service/deleteBook?id={0}&name={1}&author={2}", params);
         return new ResponseData().success();
+    }
+
+    /**
+     * 自定义熔断处理测试
+     * @return
+     */
+    public ResponseData doDiyHystrix() {
+        MyHystrixCommand myHystrixCommand = new MyHystrixCommand(HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("")), restTemplate, "http://YIRAN-CLOUD-PROVIDER/service/hello");
+
+        // 同步调用（execute 方法执行后会等待远程返回结果，拿到了远程的返回结果该方法才会返回，然后继续往下执行）
+        // ResponseData execute = myHystrixCommand.execute();
+
+        // 异步调用 不会马上执行，而是挂起线程通过cpu去调度
+        Future<ResponseData> queue = myHystrixCommand.queue();
+        ResponseData responseData = null;
+        try {
+            // 阻塞方法，直到拿到结果
+            responseData = queue.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return responseData;
     }
 }

@@ -21,6 +21,13 @@ public class JavaBookManage {
      * @return
      */
     public ResponseData doHello() {
+        // 通过线程睡眠 来测试Hystrix的服务熔断
+        System.out.println("服务提供者-1");
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new ResponseData().success(ResponseStatus.SUCCESS,true,"Hello SpringCloud - 01");
     }
 

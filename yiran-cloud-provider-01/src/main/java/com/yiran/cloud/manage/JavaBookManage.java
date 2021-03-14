@@ -21,6 +21,8 @@ public class JavaBookManage {
      * @return
      */
     public ResponseData doHello() {
+        System.out.println("服务提供者-2");
+        int n = 10 / 0;
         return new ResponseData().success(ResponseStatus.SUCCESS,true,"Hello SpringCloud - 02");
     }
 
