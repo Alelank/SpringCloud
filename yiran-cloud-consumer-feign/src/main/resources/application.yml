@@ -1,0 +1,16 @@
+server:
+  port: 8089  #服务端口
+
+
+spring:
+  application:
+    name: yiran-cloud-consumer-feign #服务名称
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka8083:8083/eureka,http://eureka8084:8084/eureka #eureka注册中心地址
+
+feign:
+  hystrix:
+    enabled: true
