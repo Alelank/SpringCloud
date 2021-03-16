@@ -1,0 +1,12 @@
+#server:
+#  port: 3723
+#
+#spring:
+#  application:
+#    name: config-client
+#  cloud:
+#    config:
+#      name: application
+#      label: master
+#      profile: dev
+#      uri: http://localhost:3722/
