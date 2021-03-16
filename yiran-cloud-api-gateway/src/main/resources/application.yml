@@ -1,0 +1,13 @@
+#server:
+#  port: 8080
+#
+#spring:
+#  application:
+#    name: yiran-cloud-api-geteway
+#
+#zuul:
+#  routes:
+#    api-yiran:
+#      path: /api-yiran/**
+#      serviceId: yiran-cloud-consumer-feign
+#
